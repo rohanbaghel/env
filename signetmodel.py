@@ -1,3 +1,4 @@
+from ssl import RAND_pseudo_bytes
 import cv2
 import numpy as np
 from keras import backend as K
@@ -81,7 +82,4 @@ def predict_score(sample_image,input_image):
     result = model.predict([pairs[0], pairs[1]])
     diff = result[0][0]
     print("Difference Score = ", diff)
-    if diff > threshold:
-        return 'Forged'
-    else:
-        return 'Genuine'
+    return diff
