@@ -1,7 +1,7 @@
 from signetmodel import predict_score
 from urllib.request import urlopen
 from urllib import request
-from flask import Flask
+from flask import Flask, request, jsonify, make_response
 import pyrebase
 import warnings
 warnings.filterwarnings('ignore')   
@@ -35,7 +35,6 @@ def complie():
     imagelist = []
     for key, value in x.items():
         imagelist.append(value)
-
     first = urlopen(imagelist[0])
     with open('image1.jpg', 'wb') as f:
         f.write(first.read())
@@ -46,7 +45,9 @@ def complie():
         f.close()
 
     result = predict_score('./image1.jpg', './image2.jpg')
-    return result
+    return {
+        "score" : str(result)
+    }
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
