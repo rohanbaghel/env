@@ -7,7 +7,7 @@ from tensorflow.keras.layers import Conv2D,ZeroPadding2D,BatchNormalization,MaxP
 
 input_shape=(155, 220, 1)
 threshold=0.4000009313225178
-weights='./Assets/signet-bhsig260-020.h5'
+weights='./Assets/signet-020.h5'
         
 def euclidean_distance(vects):
         x, y = vects
@@ -81,4 +81,9 @@ def predict_score(sample_image,input_image):
     result = model.predict([pairs[0], pairs[1]])
     diff = result[0][0]
     print("Difference Score = ", diff)
-    return diff
+    if diff < 0.004 and diff > 0:
+        return 'The Signature is Genuine'
+    elif diff == 0:
+        return'They are identical Images'
+    else:
+        return 'The signature is forged'

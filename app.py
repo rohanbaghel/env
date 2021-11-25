@@ -15,7 +15,6 @@ config = {
     'storageBucket': "gs://forgery-60388.appspot.com",
 }
 
-
 app = Flask(__name__)
 
 firebase = pyrebase.initialize_app(config)
@@ -46,7 +45,7 @@ def complie():
 
     result = predict_score('./image1.jpg', './image2.jpg')
     return {
-        "score" : str(result)
+        "score" : result
     }
 
 if __name__ == "__main__":
